@@ -3,6 +3,14 @@
     class Product
     {
         private string _id;
+        private string _brandName;
+        private string _model;
+        private decimal _price;
+        private decimal _cost;
+        private decimal _income;
+        private int _count;
+
+
         public string Id
         {
             get
@@ -11,9 +19,6 @@
             }
         }
 
-
-
-        private string _brandName;
         public string BrandName
         {
             get
@@ -22,22 +27,24 @@
             }
             set
             {
-                value = value.Trim();
-
-                if (value.Length >= 2)
+                if (string.IsNullOrEmpty(value))
                 {
+                    Console.WriteLine("brend adi bos ola bilmez!");
+                    return;
+                }
+                else if (value.Length >= 2)
+                {
+                    value = value.Trim();
                     _brandName = char.ToUpper(value[0]) + value.Substring(1).ToLower();
                 }
                 else
                 {
                     Console.WriteLine("format yanlishdir!");
+                    return;
                 }
             }
         }
 
-
-
-        private string _model;
         public string Model
         {
             get
@@ -46,15 +53,15 @@
             }
             set
             {
-                value = value.Trim();
-
                 if (string.IsNullOrEmpty(value))
                 {
                     Console.WriteLine("model adi bos ola bilmez!");
+                    return;
                 }
                 else
                 {
-                    string[] words = value.Split(' ');
+                    value = value.Trim();
+                    string[] words = value.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     for (int i = 0; i < words.Length; i++)
                     {
@@ -63,15 +70,13 @@
                             words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
                         }
                     }
+
                     _model = string.Join(" ", words);
                 }
-                _id = BrandName.Substring(0, 2) + _model.Substring(0, 2);
+                _id = _brandName.Substring(0, 2) + _model.Substring(0, 2);
             }
         }
 
-
-
-        private decimal _price;
         public decimal Price
         {
             get
@@ -98,9 +103,6 @@
 
         }
 
-
-
-        private decimal _cost;
         public decimal Cost
         {
             get
@@ -112,11 +114,11 @@
                 if (value <= 0)
                 {
                     Console.WriteLine("ugursuz cehd.");
-                    _cost = 0;
+                    _cost = 1;
                 }
                 else if (value > Price)
                 {
-                    Console.WriteLine("lazimsiz xerc!!! xerc mehsulun qiymetinden cox olmamalidir");
+                    Console.WriteLine("xerc mehsulun qiymetinden cox olmamalidir!");
                     _cost = Price;
                 }
                 else
@@ -126,9 +128,6 @@
             }
         }
 
-
-
-        private decimal _income;
         public decimal Income
         {
             get
@@ -137,9 +136,6 @@
             }
         }
 
-
-
-        private int _count;
         public int Count
         {
             get
@@ -162,6 +158,20 @@
 
 
 
+        public Product(string brandName, string model, decimal price, decimal cost, int count)
+        {
+            BrandName = brandName;
+            Model = model;
+            Price = price;
+            Cost = cost;
+            Count = count;
+
+            _id = _brandName.Substring(0, 2) + _model.Substring(0, 2);
+            _income = 0;
+        }
+
+
+
         public void GetInfo()
         {
             Console.WriteLine($"ID: {Id} ; Brand: {BrandName} ; Model: {Model} ; Price: {Price} AZN ; Cost: {Cost} AZN ; Count: {Count}");
@@ -172,12 +182,12 @@
 
         public void Sale(int numberoftheproducts)
         {
-            if (numberoftheproducts < 0)
+            if (numberoftheproducts <= 0)
             {
                 Console.WriteLine("minimum 1 mehsul olmalidir!");
                 return;
             }
-            if (numberoftheproducts > Count)
+            else if (numberoftheproducts > Count)
             {
                 Console.WriteLine("kifayet qeder mehsul yoxdur.");
                 return;
@@ -187,21 +197,8 @@
             _income += totalIncome;
             _count -= numberoftheproducts;
             Console.WriteLine($"{numberoftheproducts} mehsul satıldı");
-            Console.WriteLine($"Total gelirimiz: {totalIncome} AZN");
-        }
-
-
-
-        public Product(string brandName, string model, decimal price, decimal cost, int count)
-        {
-            BrandName = brandName;
-            Model = model.Trim();
-            Price = price;
-            Cost = cost;
-            Count = count;
-
-            _id = brandName.Substring(0, 2) + model.Substring(0, 2);
-            _income = 0;
+            Console.WriteLine($"Total gelirimiz: {_income} AZN");
         }
     }
 }
+

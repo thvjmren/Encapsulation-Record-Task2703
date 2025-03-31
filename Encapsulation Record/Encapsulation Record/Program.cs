@@ -4,13 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Product product = new Product("Apple", "13 Pro Max", 2222.2m, 222.22m, 200);
-
-            product.BrandName = "        appLE ";
-            product.Model = "  16 PRO maX      ";
-            product.Price = 3333.3m;
-            product.Cost = 333.33m;
-            product.Count = 1;
+            Product product = new Product("      apPLe", "    13   pro     MAX", 2222.2m, 222.22m, 2);
 
             Console.WriteLine("satisdan evvel:");
             product.GetInfo();

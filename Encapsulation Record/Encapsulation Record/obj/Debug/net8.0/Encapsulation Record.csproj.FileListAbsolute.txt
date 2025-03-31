@@ -26,3 +26,4 @@ C:\Users\Rana\Desktop\CA\task2703\Encapsulation Record\Encapsulation Record\bin\
 C:\Users\Rana\Desktop\CA\task2703\Encapsulation Record\Encapsulation Record\bin\Debug\net8.0\Encapsulation Record.pdb
 C:\Users\Rana\Desktop\CA\task2703\Encapsulation Record\Encapsulation Record\obj\Debug\net8.0\Encapsulation Record.genruntimeconfig.cache
 C:\Users\Rana\Desktop\CA\task2703\Encapsulation Record\Encapsulation Record\obj\Debug\net8.0\ref\Encapsulation Record.dll
+C:\Users\Rana\Desktop\CA\task2703\Encapsulation Record\Encapsulation Record\obj\Debug\net8.0\Encapsulation Record.sourcelink.json
